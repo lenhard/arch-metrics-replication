@@ -1,0 +1,159 @@
+# modules
+globals
+preferences
+model
+logic
+gui
+cli
+
+# mapping: <package>.* maps all classes in <package> except for those which are explicitly listed in another mapping
+# <high_level_module> <regular_expression>
+globals net.sf.jabref.Defaults
+globals net.sf.jabref.Globals
+globals net.sf.jabref.JabRefException
+globals net.sf.jabref.JabRefExecutorService
+globals net.sf.jabref.JabRefMain
+globals net.sf.jabref.migrations.*
+
+preferences HighlightMatchingGroupPreferences
+preferences JabRefPreferences
+preferences JabRefPreferencesFilter
+
+model net.sf.jabref.BibDatabaseContext
+model net.sf.jabref.MetaData
+model net.sf.jabref.logic.labelpattern.AbstractLabelPattern
+model net.sf.jabref.logic.labelpattern.DatabaseLabelPattern
+model net.sf.jabref.logic.labelpattern.GlobalLabelPattern
+model net.sf.jabref.logic.util.UpdateField
+model net.sf.jabref.specialfields.Printed
+model net.sf.jabref.specialfields.Priority
+model net.sf.jabref.specialfields.Quality
+model net.sf.jabref.specialfields.Rank
+model net.sf.jabref.specialfields.ReadStatus
+model net.sf.jabref.specialfields.Relevance
+model net.sf.jabref.specialfields.SpecialField
+model net.sf.jabref.specialfields.SpecialFieldUtils
+model net.sf.jabref.event.*
+model net.sf.jabref.model.*
+
+logic net.sf.jabref.collab.Change
+logic net.sf.jabref.collab.ChangeScanner
+logic net.sf.jabref.collab.EntryAddChange
+logic net.sf.jabref.collab.EntryChange
+logic net.sf.jabref.collab.ChangeDeleteChange
+logic net.sf.jabref.collab.FileUpdateListener
+logic net.sf.jabref.collab.FileUpdateMonitor
+logic net.sf.jabref.collab.GroupChange
+logic net.sf.jabref.collab.MetaDataChange
+logic net.sf.jabref.collab.PreambleChange
+logic net.sf.jabref.collab.StringAddChange
+logic net.sf.jabref.collab.StringChange
+logic net.sf.jabref.collab.StringRemoveChange
+logic net.sf.jabref.exporter.AutoSaveManager
+logic net.sf.jabref.exporter.BibDatabaseWriter
+logic net.sf.jabref.exporter.CustomExportList
+logic net.sf.jabref.exporter.ExportComparator
+logic net.sf.jabref.exporter.ExportFileFilter
+logic net.sf.jabref.exporter.ExportFormat
+logic net.sf.jabref.exporter.ExportFormats
+logic net.sf.jabref.exporter.FieldFormatterCleanups
+logic net.sf.jabref.exporter.IExportFormat
+logic net.sf.jabref.exporter.MsBibExportFrmat
+logic net.sf.jabref.exporter.ModsExportFormat
+logic net.sf.jabref.exporter.OOCalcDatabase
+logic net.sf.jabref.exporter.OpenDocumentRepresentation
+logic net.sf.jabref.exporter.OpenDocumentSpreadsheetCreator
+logic net.sf.jabref.exporter.OpenOfficeDocumentCreator
+logic net.sf.jabref.exporter.SaveException
+logic net.sf.jabref.exporter.SavePreferences
+logic net.sf.jabref.exporter.SaveSession
+logic net.sf.jabref.exporter.VerifyingWriter
+logic net.sf.jabref.external.AutoSetLinks
+logic net.sf.jabref.importer.ConvertLegacyExplicitGroups
+logic net.sf.jabref.importer.CustomImportList
+logic net.sf.jabref.importer.CustomImporter
+logic net.sf.jabref.importer.DatabaseFileLookup
+logic net.sf.jabref.importer.EntryFromExternalFileCreator
+logic net.sf.jabref.importer.EntryFromFileCreator
+logic net.sf.jabref.importer.EntryFromFileCreatorManager
+logic net.sf.jabref.importer.EntryFromPDFCreator
+logic net.sf.jabref.importer.ImportFormatReader
+logic net.sf.jabref.importer.ImportInspector
+logic net.sf.jabref.importer.OAI2Handler
+logic net.sf.jabref.importer.OutputPrinter
+logic net.sf.jabref.importer.ParserResult
+logic net.sf.jabref.importer.UnlinkedFilesCrawler
+logic net.sf.jabref.pdfimport.PdfImporter
+logic net.sf.jabref.sql.DBExporterAndImporterFactory
+logic net.sf.jabref.sql.DBStrings
+logic net.sf.jabref.sql.DBStringsPreferences
+logic net.sf.jabref.sql.Database
+logic net.sf.jabref.sql.DatabaseType
+logic net.sf.jabref.sql.DatabaseUtil
+logic net.sf.jabref.sql.SQLUtil
+logic net.sf.jabref.sql.importer.DBImporterResult
+logic net.sf.jabref.sql.importer.DatabaseImporter
+logic net.sf.jabref.bst.*
+logic net.sf.jabref.importer.fetcher.*
+logic net.sf.jabref.importer.fileformat.*
+logic net.sf.jabref.logic.*
+logic net.sf.jabref.sql.database.*
+logic net.sf.jabref.sql.exporter.*
+
+gui net.sf.jabref.JabRefGUI
+gui net.sf.jabref.JabRefPreferencesFilterDialog
+gui net.sf.jabref.collab.ChangeDisplayDialog
+gui net.sf.jabref.collab.FileUpdatePanel
+gui net.sf.jabref.collab.InfoPane
+gui net.sf.jabref.exporter.CustomExportDialog
+gui net.sf.jabref.exporter.ExportCustomizationDialog
+gui net.sf.jabref.exporter.ExportToClipboardAction
+gui net.sf.jabref.exporter.RtfSelection
+gui net.sf.jabref.exporter.SaveAllAction
+gui net.sf.jabref.exporter.SaveDatabaseAction
+gui net.sf.jabref.importer.AppendDatabaseAction
+gui net.sf.jabref.importer.AutosaveStartupPrompter
+gui net.sf.jabref.importer.CheckForNewEntryTypesAction
+gui net.sf.jabref.importer.HandleDuplicateWarnings
+gui net.sf.jabref.importer.ImportCustomizationDialog
+gui net.sf.jabref.importer.ImportFileFilter
+gui net.sf.jabref.importer.ImportFormats
+gui net.sf.jabref.importer.ImportMenuItem
+gui net.sf.jabref.importer.OpenDatabaseAction
+gui net.sf.jabref.importer.PostOpenAction
+gui net.sf.jabref.importer.UnlinkedPDFFileFilter
+gui net.sf.jabref.specialfields.SpecialFieldAction
+gui net.sf.jabref.specialfields.SpecialFieldDatabaseChangeListener
+gui net.sf.jabref.specialfields.SpecialFieldDropDown
+gui net.sf.jabref.specialfields.SpecialFieldMenuAction
+gui net.sf.jabref.specialfields.SpecialFieldUpdateListener
+gui net.sf.jabref.specialfields.SpecialFieldValue
+gui net.sf.jabref.sql.DBConnectDialog
+gui net.sf.jabref.sql.DBImportExportDalog
+gui net.sf.jabref.sql.DbConnectAction
+gui net.sf.jabref.sql.importer.DbImportAction
+gui net.sf.jabref.external.*
+gui net.sf.jabref.gui.*
+gui osx.macadapter.*
+
+cli net.sf.jabref.importer.ImportInspectionCommandLine
+cli net.sf.jabref.cli.*
+
+# relations
+# <source_module> <target_module>
+globals cli
+globals gui
+globals logic
+globals model
+globals preferences
+logic model
+gui model
+gui logic
+gui preferences
+gui cli
+gui globals
+cli model
+cli logic
+cli globals
+cli preferences
+
