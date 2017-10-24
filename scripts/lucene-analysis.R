@@ -178,25 +178,9 @@ fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, total
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# correlations from significant non-size metrics to size (in terms of ncloc)
+significantNonSize <- c("comment_lines","WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca")
+correlations <-  list()
+for(i in significantNonSize) {
+  correlations[i] <- cor(lucene$ncloc, lucene[[i]], use="pairwise.complete.obs", method="spearman")
+}
