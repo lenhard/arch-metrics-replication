@@ -3,8 +3,8 @@
 ###############################################################
 
 # link to csv files
-antFile <- "../data/ant-data.csv"
-ant = read.csv(antFile, sep=",")
+antFile <- "c:/workspaces/git/arch-metrics-replication/data/ant-data.csv"
+ant = read.csv(antFile, sep=";")
 ant <- subset(ant, select=-c(X))
 
 #################################################################################
@@ -22,9 +22,9 @@ targetCor <- list()
 totalCor <- list()
 
 for(i in metricNames) {
- sourceCor[i] <- cor(ant$Source, ant[[i]], use="pairwise.complete.obs")
- targetCor[i] <- cor(ant$Target, ant[[i]], use="pairwise.complete.obs")
- totalCor[i] <- cor(ant$Total, ant[[i]], use="pairwise.complete.obs")
+ sourceCor[i] <- cor(ant$Source, ant[[i]], use="pairwise.complete.obs", method="spearman")
+ targetCor[i] <- cor(ant$Target, ant[[i]], use="pairwise.complete.obs", method="spearman")
+ totalCor[i] <- cor(ant$Total, ant[[i]], use="pairwise.complete.obs", method="spearman")
 }
 
 sourceCor <- sourceCor[(sourceCor > 0.3) | (sourceCor < -0.3)]

@@ -2,8 +2,8 @@
 ### Initial file parsing and data frame setup #################
 ###############################################################
 
-jabRefAllFile <- "../data/jabref-data.csv"
-all = read.csv(jabRefAllFile, sep=",")
+jabRefAllFile <- "c:/workspaces/git/arch-metrics-replication/data/jabref-data.csv"
+all = read.csv(jabRefAllFile, sep=";")
 all <- subset(all, select=-c(X))
 
 # select the metrics for which fisher tests and correlations are computed
@@ -17,9 +17,9 @@ targetCor <- list()
 totalCor <- list()
 
 for(i in metricNames) {
- sourceCor[i] <- cor(all$Source, all[[i]], use="pairwise.complete.obs")
- targetCor[i] <- cor(all$Target, all[[i]], use="pairwise.complete.obs")
- totalCor[i] <- cor(all$Total, all[[i]], use="pairwise.complete.obs")
+ sourceCor[i] <- cor(all$Source, all[[i]], use="pairwise.complete.obs", method="spearman")
+ targetCor[i] <- cor(all$Target, all[[i]], use="pairwise.complete.obs", method="spearman")
+ totalCor[i] <- cor(all$Total, all[[i]], use="pairwise.complete.obs", method="spearman")
 }
 
 sourceCor <- sourceCor[(sourceCor > 0.3) | (sourceCor < -0.3)]
@@ -75,7 +75,6 @@ for(i in metricNames) {
 }
 
 fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, totalFish, totalFishEffect)
-accuracy <- list(precision, recall)
 
 # The chance of having no violations in classes with the lower metric value are ESTIMATE times the chance of having no violation in classes with a higher metric value
 
@@ -127,7 +126,7 @@ for(i in metricNames) {
 }
 
 fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, totalFish, totalFishEffect)
-accuracy <- list(precision, recall)
+
 
 # Fisher analysis for the 9th quantile
 sourceFish <- list()

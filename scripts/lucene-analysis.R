@@ -3,7 +3,7 @@
 ###############################################################
 
 # link to csv files
-luceneFile <- "../data/lucene-data.csv"
+luceneFile <- "c:/workspaces/git/arch-metrics-replication/data/lucene-data.csv"
 lucene = read.csv(luceneFile, sep=",")
 lucene <- subset(lucene, select=-c(X))
 
@@ -22,9 +22,9 @@ targetCor <- list()
 totalCor <- list()
 
 for(i in metricNames) {
- sourceCor[i] <- cor(lucene$Source, lucene[[i]], use="pairwise.complete.obs")
- targetCor[i] <- cor(lucene$Target, lucene[[i]], use="pairwise.complete.obs")
- totalCor[i] <- cor(lucene$Total, lucene[[i]], use="pairwise.complete.obs")
+ sourceCor[i] <- cor(lucene$Source, lucene[[i]], use="pairwise.complete.obs", method="spearman")
+ targetCor[i] <- cor(lucene$Target, lucene[[i]], use="pairwise.complete.obs", method="spearman")
+ totalCor[i] <- cor(lucene$Total, lucene[[i]], use="pairwise.complete.obs", method="spearman")
 }
 
 sourceCor <- sourceCor[(sourceCor > 0.3) | (sourceCor < -0.3)]
