@@ -2,8 +2,7 @@
 ### Initial file parsing and data frame setup #################
 ###############################################################
 
-jabRefAllFile <- "c:/workspaces/git/arch-metrics-replication/data/jabref-data.csv"
-all = read.csv(jabRefAllFile, sep=";")
+all = read.csv(file=file.path("arch-metrics-replication/data", "jabref-data.csv"), sep=";")
 all <- subset(all, select=-c(X))
 
 # select the metrics for which fisher tests and correlations are computed

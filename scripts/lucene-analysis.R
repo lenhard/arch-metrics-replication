@@ -3,8 +3,7 @@
 ###############################################################
 
 # link to csv files
-luceneFile <- "c:/workspaces/git/arch-metrics-replication/data/lucene-data.csv"
-lucene = read.csv(luceneFile, sep=",")
+all = read.csv(file=file.path("arch-metrics-replication/data", "lucene-data.csv"), sep=";")
 lucene <- subset(lucene, select=-c(X))
 
 #################################################################################

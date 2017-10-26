@@ -3,8 +3,7 @@
 ###############################################################
 
 # link to csv files
-antFile <- "c:/workspaces/git/arch-metrics-replication/data/ant-data.csv"
-ant = read.csv(antFile, sep=";")
+all = read.csv(file=file.path("arch-metrics-replication/data", "ant-data.csv"), sep=";")
 ant <- subset(ant, select=-c(X))
 
 #################################################################################
