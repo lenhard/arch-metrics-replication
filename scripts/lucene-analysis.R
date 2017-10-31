@@ -3,7 +3,7 @@
 ###############################################################
 
 # link to csv files
-all = read.csv(file=file.path("arch-metrics-replication/data", "lucene-data.csv"), sep=";")
+lucene = read.csv(file=file.path("arch-metrics-replication/data", "lucene-data.csv"), sep=",")
 lucene <- subset(lucene, select=-c(X))
 
 #################################################################################
@@ -178,8 +178,14 @@ fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, total
 
 
 # correlations from significant non-size metrics to size (in terms of ncloc)
-significantNonSize <- c("comment_lines","WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca")
-correlations <-  list()
+significantNonSize <- c("WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca")
+correlationsNcloc <-  list()
+correlationsNclocP <-  list()
+correlationsStatements <- list()
+correlationsStatementsP <- list()
 for(i in significantNonSize) {
-  correlations[i] <- cor(lucene$ncloc, lucene[[i]], use="pairwise.complete.obs", method="spearman")
+  correlationsNcloc[i] <- cor(lucene$ncloc, lucene[[i]], use="pairwise.complete.obs", method="spearman")
+  correlationsNclocP[i] <- cor.test(lucene$ncloc, lucene[[i]], use="pairwise.complete.obs", method="spearman")$p.value
+  correlationsStatements[i] <- cor(lucene$Statements, lucene[[i]], use="pairwise.complete.obs", method="spearman")
+  correlationsStatementsP[i] <- cor.test(lucene$Statements, lucene[[i]], use="pairwise.complete.obs", method="spearman")$p.value
 }

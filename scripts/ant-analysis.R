@@ -3,7 +3,7 @@
 ###############################################################
 
 # link to csv files
-all = read.csv(file=file.path("arch-metrics-replication/data", "ant-data.csv"), sep=";")
+all = read.csv(file=file.path("arch-metrics-replication/data", "ant-data.csv"), sep=",")
 ant <- subset(ant, select=-c(X))
 
 #################################################################################
@@ -179,8 +179,10 @@ fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, total
 
 
 # correlations from significant non-size metrics to size (in terms of ncloc)
-significantNonSize <- c("comment_lines","WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca")
-correlations <-  list()
+significantNonSize <- c("WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca")
+correlationsNcloc <-  list()
+correlationsStatements <- list()
 for(i in significantNonSize) {
-  correlations[i] <- cor(ant$ncloc, ant[[i]], use="pairwise.complete.obs", method="spearman")
+  correlationsNcloc[i] <- cor(ant$ncloc, ant[[i]], use="pairwise.complete.obs", method="spearman")
+  correlationsStatements[i] <- cor(ant$Statements, ant[[i]], use="pairwise.complete.obs", method="spearman")
 }
