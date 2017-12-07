@@ -176,14 +176,14 @@ for(i in metricNames) {
 fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, totalFish, totalFishEffect)
 
 # correlations from significant non-size metrics to size (in terms of ncloc)
-significantNonSize <- c("WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca")
+significantNonSize <- c("WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca", "RFC")
 correlationsNcloc <-  list()
 correlationsNclocP <-  list()
 correlationsStatements <- list()
 correlationsStatementsP <- list()
 for(i in significantNonSize) {
   correlationsNcloc[i] <- cor(all$ncloc, all[[i]], use="pairwise.complete.obs", method="spearman")
-  correlationsNclocP[i] <- cor.test(all$ncloc, all[[i]], use="pairwise.complete.obs", method="spearman")$p.value
+  correlationsNclocP[i] <- cor.test(all$ncloc, all[[i]], use="pairwise.complete.obs", method="spearman", exact=FALSE)$p.value
   correlationsStatements[i] <- cor(all$Statements, all[[i]], use="pairwise.complete.obs", method="spearman")
-  correlationsStatementsP[1] <- cor.test(all$Statements, all[[i]], use="pairwise.complete.obs", method="spearman")$p.value
+  correlationsStatementsP[1] <- cor.test(all$Statements, all[[i]], use="pairwise.complete.obs", method="spearman", exact=FALSE)$p.value
 }

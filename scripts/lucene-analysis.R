@@ -178,14 +178,14 @@ fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, total
 
 
 # correlations from significant non-size metrics to size (in terms of ncloc)
-significantNonSize <- c("WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca")
+significantNonSize <- c("WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca", "RFC")
 correlationsNcloc <-  list()
 correlationsNclocP <-  list()
 correlationsStatements <- list()
 correlationsStatementsP <- list()
 for(i in significantNonSize) {
   correlationsNcloc[i] <- cor(lucene$ncloc, lucene[[i]], use="pairwise.complete.obs", method="spearman")
-  correlationsNclocP[i] <- cor.test(lucene$ncloc, lucene[[i]], use="pairwise.complete.obs", method="spearman")$p.value
+  correlationsNclocP[i] <- cor.test(lucene$ncloc, lucene[[i]], use="pairwise.complete.obs", method="spearman", exact=FALSE)$p.value
   correlationsStatements[i] <- cor(lucene$Statements, lucene[[i]], use="pairwise.complete.obs", method="spearman")
-  correlationsStatementsP[i] <- cor.test(lucene$Statements, lucene[[i]], use="pairwise.complete.obs", method="spearman")$p.value
+  correlationsStatementsP[i] <- cor.test(lucene$Statements, lucene[[i]], use="pairwise.complete.obs", method="spearman", exact=FALSE)$p.value
 }
