@@ -13,5 +13,4 @@ For convenience, the repository contains a Dockerfile which sets up RStudio in a
  - open your browser at http://localhost:8787/ (Linux) or http://YOUR-DOCKER-MACHINE-IP:8787/
  - RStudio's default credentials are username: `rstudio`, password: `rstudio`
  - Open one of the R scripts in folder `arch-metrics-replication`, read the code and execute it
-
-
+ 
