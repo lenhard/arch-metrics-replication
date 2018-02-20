@@ -1,16 +1,18 @@
-###############################################################
-### Initial file parsing and data frame setup #################
-###############################################################
+#################################################################################
+####### JabRef Data Analysis #######################################################
+#################################################################################
 
-all = read.csv(file=file.path("arch-metrics-replication/data", "jabref-data.csv"), sep=";")
+### Initial file parsing and data frame setup ###
+
+all = read.csv(file=file.path("arch-metrics-replication/data", "jabref-data.csv"), sep=",")
 all <- subset(all, select=-c(X))
 
-# select the metrics for which fisher tests and correlations are computed
+# select the metrics for which fisher tests and correlations are computed; predictor variables and metrics that could not be normalized (textual data) are excluded
 metricNames <- names(all)
-remove <- c("Class", "Source", "Target", "Total", "Avg.Depth", "Avg.Complexity", "Max.Depth")
+remove <- c("Class", "Source", "Target", "Total", "Max.Depth")
 metricNames <- metricNames[! metricNames %in% remove]
 
-# compute correlations and store them in the lists
+### compute correlations and store them in the lists
 sourceCor <- list()
 targetCor <- list()
 totalCor <- list()
@@ -25,10 +27,13 @@ sourceCor <- sourceCor[(sourceCor > 0.3) | (sourceCor < -0.3)]
 targetCor <- targetCor[(targetCor > 0.3) | (targetCor < -0.3)]
 totalCor <- totalCor[(totalCor > 0.3) | (totalCor < -0.3)]
 
+# to view the results, inspect the contents of "correlations"
+# this is a list of three lists that include all correlations meeting the thresholds in the paper, sorted by the inconsistency type
 correlations <- list(sourceCor, targetCor, totalCor)
 
-#compute fisher tests and store p-values and estimates in lists
+### compute fisher tests and store p-values and estimates in lists
 
+# first calculation round for cutoff at 50% threshold
 sourceFish <- list()
 sourceFishEffect <- list()
 targetFish <- list()
@@ -73,11 +78,19 @@ for(i in metricNames) {
     
 }
 
+# the results are stored in a list of six lists named "fishes". To view the results, inspect the contents of these lists
+# the lists are paired:
+# 	[1]: p-values for fisher tests regarding classes that are the source of inconsistencies
+# 	[2]: odds ratios for fisher tests regarding classes that are the source of inconsistencies
+# 	[3]: p-values for fisher tests regarding classes that are the targets of inconsistencies
+# 	[4]: odds ratios for fisher tests regarding classes that are the targets of inconsistencies
+# 	[5]: p-values for fisher tests regarding classes that are either targets or sources of inconsistencies
+# 	[6]: odds ratios for fisher tests regarding classes that are either targets or sources of inconsistencies
+# the lists only include metrics where p-values were below the significance level
+# odds ratios can be interpreted in the following: The chance of having no violations in classes with the lower metric value are ESTIMATE times the chance of having no violation in classes with a higher metric value
 fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, totalFish, totalFishEffect)
 
-# The chance of having no violations in classes with the lower metric value are ESTIMATE times the chance of having no violation in classes with a higher metric value
-
-# Fisher analysis for the fourth quartile
+### Fisher analysis for the fourth quartile
 sourceFish <- list()
 sourceFishEffect <- list()
 targetFish <- list()
@@ -124,10 +137,10 @@ for(i in metricNames) {
     
 }
 
+# results viewing and interpretation works in the same way as above
 fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, totalFish, totalFishEffect)
 
-
-# Fisher analysis for the 9th quantile
+### Fisher analysis for the 9th quantile
 sourceFish <- list()
 sourceFishEffect <- list()
 targetFish <- list()
@@ -175,7 +188,7 @@ for(i in metricNames) {
 
 fishes <- list(sourceFish, sourceFishEffect, targetFish, targetFishEffect, totalFish, totalFishEffect)
 
-# correlations from significant non-size metrics to size (in terms of ncloc)
+### correlations from significant non-size metrics to size (in terms of ncloc and statements)
 significantNonSize <- c("WMC","pmdAll", "pmdDesign", "code_smells", "complexity", "LCOM", "Ca", "RFC")
 correlationsNcloc <-  list()
 correlationsNclocP <-  list()
@@ -187,3 +200,8 @@ for(i in significantNonSize) {
   correlationsStatements[i] <- cor(all$Statements, all[[i]], use="pairwise.complete.obs", method="spearman")
   correlationsStatementsP[1] <- cor.test(all$Statements, all[[i]], use="pairwise.complete.obs", method="spearman", exact=FALSE)$p.value
 }
+# results can be viewed by inspecting four lists:
+#	correlationsNcloc: the correlation coefficients between the metrics and the number of lines of code
+#	correlationsNclocP: p-values for the correlation coefficients between the metrics and the number of lines of code
+#	correlationsStatements: the correlation coefficients between the metrics and the number of statements
+#	correlationsStatementsP: p-values for the correlation coefficients between the metrics and the number of statements
